@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GunFace : MonoBehaviour
 {
-    public Projectile projPrefab;
+    public Bullet projPrefab;
+    public Bomb RPGprefab;
   
 
     private enum State
@@ -22,9 +23,11 @@ public class GunFace : MonoBehaviour
     public float pistolcool = 2f;
     public float shotcool = 5f;
     public float riflecool = 0.5f;
+    public float RPGcool = 15f;
+    public float snipecool = 20f;
 
 
-    
+
 
     private void Awake()
     {
@@ -43,11 +46,14 @@ public class GunFace : MonoBehaviour
     {
         Weapon = Sweapon;
         pistolcool = 2f;
-    shotcool = 5f;
-    riflecool = 0.5f;
+     shotcool = 5f;
+     riflecool = 0.5f;
+        RPGcool = 15f;
+     snipecool = 20f;
 }
-   
- 
+  
+
+
 
     // Update is called once per frame
     void Update()
@@ -77,7 +83,8 @@ public class GunFace : MonoBehaviour
         pistolcool -= Time.deltaTime;
         shotcool -= Time.deltaTime;
         riflecool -= Time.deltaTime;
-      
+        RPGcool -= Time.deltaTime;
+        snipecool -= Time.deltaTime;
 
         if(pistolcool <= 0f)
         {
@@ -120,7 +127,7 @@ public class GunFace : MonoBehaviour
         {
 
 
-            Projectile temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
+            Bullet temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
 
             temp.transform.position = this.transform.position + this.transform.up * 0.4f * Mathf.Sign(this.transform.localScale.x);
             // temp.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
@@ -140,7 +147,7 @@ public class GunFace : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 // Debug.Log("ran ");
-                Projectile temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
+                Bullet temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
 
                 temp.transform.position = this.transform.position + this.transform.up * 0.4f * Mathf.Sign(this.transform.localScale.x);
                 // temp.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
@@ -157,7 +164,7 @@ public class GunFace : MonoBehaviour
         } else if (riflecool <= 0f && Weapon == "Rifle")
         {
 
-            Projectile temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
+            Bullet temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
 
             temp.transform.position = this.transform.position + this.transform.up * 0.4f * Mathf.Sign(this.transform.localScale.x);
             // temp.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
@@ -166,6 +173,11 @@ public class GunFace : MonoBehaviour
             temp.setDirection(d);
             pistolcool = 2f;
            
+        }else if (RPGcool <= 0f && Weapon == "RPG")
+        {
+            Bullet temp = GameObject.Instantiate(projPrefab, new Vector3(this.transform.position.x + d.x, this.transform.position.y + d.y), this.transform.rotation);
+
+            temp.transform.position = this.transform.position + this.transform.up * 0.4f * Mathf.Sign(this.transform.localScale.x);
         }
     }
         
