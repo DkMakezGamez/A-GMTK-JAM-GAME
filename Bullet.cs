@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float Speed;
-    [SerializeField] private float Time = 8f;
+    [SerializeField] private float tyme = 8f;
     private Rigidbody2D rb;
 
 
@@ -19,7 +19,15 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(rb.transform.right * Speed);
-        Destroy(this.gameObject, Time);
+        Destroy(this.gameObject, tyme);
+    }
+
+
+   
+    void Update()
+    {
+       
+        transform.Translate(Vector2.up * Time.deltaTime * Speed);
     }
 
 }

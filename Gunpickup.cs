@@ -36,4 +36,18 @@ public class Gunpickup : MonoBehaviour
             }
         }
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<GunFace>() != null)
+        {
+            GunFace G = collision.gameObject.GetComponent<GunFace>();
+            G.setWeapon(weapon);
+            if (!debug)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }
