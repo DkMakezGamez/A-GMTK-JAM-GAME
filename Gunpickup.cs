@@ -13,6 +13,11 @@ public class Gunpickup : MonoBehaviour
         
     }
 
+  public void setWeapon(string w)
+    {
+        weapon = w;
+    }
+
     // Update is called once per frame
     void Update()
     {
